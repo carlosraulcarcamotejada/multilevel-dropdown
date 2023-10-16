@@ -11,10 +11,7 @@ const Navbar: FC = (): JSX.Element => {
         <nav className="">
           <Menu as="ul" className="flex">
             {menuItems.map((menu, index) => {
-              const depthLevel = 0;
-              return (
-                <MenuItems items={menu} key={index} depthLevel={depthLevel} />
-              );
+              return <MenuItems items={menu} key={index} />;
             })}
           </Menu>
         </nav>

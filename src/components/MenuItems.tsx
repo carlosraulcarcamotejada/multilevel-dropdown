@@ -5,11 +5,14 @@ import { ArrowRightIcon } from "@heroicons/react/20/solid";
 import { Menu } from "@headlessui/react";
 
 interface MenuItemsProps {
-  items: MenuItem;
-  depthLevel: number;
+  items?: MenuItem;
+  depthLevel?: number;
 }
 
-const MenuItems: FC<MenuItemsProps> = ({ depthLevel, items }): JSX.Element => {
+const MenuItems: FC<MenuItemsProps> = ({
+  depthLevel = 0,
+  items,
+}): JSX.Element => {
   const ref = useRef<HTMLDivElement>(null);
 
   return (
@@ -24,7 +27,7 @@ const MenuItems: FC<MenuItemsProps> = ({ depthLevel, items }): JSX.Element => {
                         
                       `}
         >
-          {items.submenu ? (
+          {items?.submenu ? (
             <Menu as={Fragment}>
               {({ open: isOpen }) => (
                 <>
@@ -40,7 +43,9 @@ const MenuItems: FC<MenuItemsProps> = ({ depthLevel, items }): JSX.Element => {
                               px-4 
                               py-3 
                               rounded-md
- 
+
+                             
+                              focus:outline-none
                               `}
                   >
                     <span className="text-left  ">{items.title}</span>
@@ -53,16 +58,17 @@ const MenuItems: FC<MenuItemsProps> = ({ depthLevel, items }): JSX.Element => {
                     depthLevel={depthLevel}
                     submenus={items.submenu!}
                     ref={ref}
+                    isOpen={isOpen}
                   />
                 </>
               )}
             </Menu>
           ) : (
             <div
-              className="py-3 px-4 mx-2 cursor-pointer "
-              onClick={() => console.log(items.title)}
+              className="py-3 px-4 mx-2 cursor-pointer rounded-md"
+              onClick={() => console.log(items?.title)}
             >
-              {items.title}
+              {items?.title}
             </div>
           )}
         </div>

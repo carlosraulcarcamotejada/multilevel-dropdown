@@ -1,7 +1,7 @@
 interface MenuItem {
   title: string;
   submenu?: MenuItem[];
-  onClick?: () => void ;
+  path?:string
 }
 
 export type { MenuItem };

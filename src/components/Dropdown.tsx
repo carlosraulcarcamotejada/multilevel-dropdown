@@ -1,4 +1,4 @@
-import { ForwardedRef, forwardRef, JSX } from "react";
+import { ForwardedRef, forwardRef, JSX, useEffect } from "react";
 import { MenuItem } from "../interfaces/MenuItem";
 import { MenuItems } from "./MenuItems";
 import { Menu, Transition } from "@headlessui/react";
@@ -6,14 +6,19 @@ import { Menu, Transition } from "@headlessui/react";
 interface DropDownProps {
   depthLevel: number;
   submenus: MenuItem[];
+  isOpen: boolean;
 }
 
 const DropDown = forwardRef(
   (props: DropDownProps, ref: ForwardedRef<HTMLDivElement>): JSX.Element => {
-    const { submenus } = props;
+    const { submenus, isOpen } = props;
     let { depthLevel } = props;
 
     depthLevel++;
+
+    useEffect(() => {
+      console.log({ isOpen });
+    }, [isOpen]);
 
     return (
       <Transition
